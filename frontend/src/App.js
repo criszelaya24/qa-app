@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 
 class App extends Component  {
   render(){
-    return ({
+    return (
       <div>
-        <p>Working on progress</p>
+        <p>working on progress</p>
       </div>
-    })
+    )
   }
 }
 
