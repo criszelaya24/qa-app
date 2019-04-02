@@ -1,4 +1,4 @@
-# qa-app
+# qa-app :bomb:
 
 ## From?
 - Tutorial from [auth0 turotial](https://auth0.com/blog/react-tutorial-building-and-securing-your-first-app/)
