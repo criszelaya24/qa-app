@@ -6,6 +6,7 @@
 ## how to install?
 
 ```
+- Download this repo
 - get inside inside from each folder
 - run "npm install"
 - ready to go!
