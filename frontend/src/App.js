@@ -5,6 +5,7 @@ class App extends Component  {
     return (
       <div>
         <NavBar/>
+        <p>working on progress</p>
       </div>
     )
   }
