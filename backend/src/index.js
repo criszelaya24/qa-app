@@ -62,7 +62,7 @@ app.post("/", (req, res) => {
 // insert new answer to the question
 
 app.post("/answer/:id", (req, res) => {
-  const {answer} = req.body;
+  const answer = req.body.answer;
   const id = parseInt(req.params.id)
   const question = questions.filter( q => (q.id === id));
   if (question.length > 1) return res.status(500).send();
