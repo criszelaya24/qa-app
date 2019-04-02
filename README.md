@@ -10,3 +10,7 @@
 - run "npm install"
 - ready to go!
 ```
+
+## Objetives
+
+- Learn react and connect with a backend on express, the backend is not connected with DB its just a temporary information
