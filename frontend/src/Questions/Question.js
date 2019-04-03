@@ -10,14 +10,17 @@ class Question extends Component {
   }
   async componentDidMount(){
     const { match: { params } } = this.props;
-    const question = (await axios.get(`http://localhost:8081/${params.questionId}`)).data;
+    const question = (await axios.get(`http://localhost:8080/${params.questionId}`)).data;
     this.setState({
       question: question,
     });
   }
   render(){
-    const question = this.state;
+    const question = this.state.question;
     if (question === null) return <p>Loading..</p>;
+    question.answers.map((answer, idx) => (
+      console.log(idx)
+    ))
     return(
       <div className="container">
         <div className="row">
@@ -28,7 +31,7 @@ class Question extends Component {
             <p>Answers:</p>
             {
               question.answers.map((answer, idx) => (
-                <p className="lead" key={idx}>{answer.answer}</p>
+                <p className="lead" key={idx}>{answer}</p>
               ))
             }
           </div>

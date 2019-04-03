@@ -16,6 +16,7 @@ class Questions extends Component {
     });
   }
   render(){
+    console.log(this.state.questions);
     return(
       <div className="container">
         <div className="row">
@@ -26,7 +27,7 @@ class Questions extends Component {
                 <Link to={`/question/${q.id}`}>
                   <div className="card text-white bg-success mb-3">
                     <div className="card-header">
-                      Answer: {q.answer}
+                      Answer: {q.answers}
                       <div className="card-body">
                         <h4 className="card-title">{q.title}</h4>
                         <p className="card-text">{q.description}</p>

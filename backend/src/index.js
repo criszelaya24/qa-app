@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     id: q.id,
     title: q.title,
     description: q.description,
-    answer: q.answer
+    answers: q.answers
   }));
   res.status(200).send(qs)
 });
@@ -53,7 +53,7 @@ app.post("/", (req, res) => {
     id: questions.length + 1,
     title: title,
     description: description,
-    answer: [],
+    answers: [],
   };
   questions.push(newQuestion);
   res.status(200).send();
@@ -67,7 +67,7 @@ app.post("/answer/:id", (req, res) => {
   const question = questions.filter( q => (q.id === id));
   if (question.length > 1) return res.status(500).send();
   if (question.length === 0) return res.status(404).send()
-  question[0].answer.push(answer);
+  question[0].answers.push(answer);
   res.status(200).send();
 });
 
