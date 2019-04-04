@@ -2,26 +2,29 @@ import React, {Component, Fragment} from 'react';
 import {withRouter} from 'react-router-dom';
 import auth0Client from '../Auth';
 
-class SubmitAnswer {
+class SubmitAnswer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      answer: ''
+      answer: '',
     };
   }
+
   updateAnswer(value) {
     this.setState({
       answer: value,
     });
   }
-  submit() {
-   this.props.submitAnswer(this.state.answer);
 
-   this.setState({
-     answer: '',
-   });
- }
- render() {
+  submit() {
+    this.props.submitAnswer(this.state.answer);
+
+    this.setState({
+      answer: '',
+    });
+  }
+
+  render() {
     if (!auth0Client.isAuthenticated()) return null;
     return (
       <Fragment>
