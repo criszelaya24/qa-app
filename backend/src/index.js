@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+// libraries to connect with auth0 request
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 
 // defining express app
 
@@ -44,9 +47,20 @@ app.get("/:id", (req, res) => {
   res.send(question[0]);
 })
 
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://dev-uf1fkybj.auth0.com/.well-known/jwks.json`
+  }),
+  audience: '87DwawCr74SxzSjsBFTjue2Mj8zbh1qW',
+  issuer: `https://dev-uf1fkybj.auth0.com/`,
+  algorithms: ['RS256']
+});
+
 // inserting into the array
-app.post("/", (req, res) => {
-  console.log(req.body);
+app.post("/", checkJwt, (req, res) => {
   const title = req.body.title
   const description = req.body.description;
   const newQuestion = {
@@ -54,6 +68,7 @@ app.post("/", (req, res) => {
     title: title,
     description: description,
     answers: [],
+    author: req.user.name,
   };
   questions.push(newQuestion);
   res.status(200).send();
@@ -61,13 +76,16 @@ app.post("/", (req, res) => {
 
 // insert new answer to the question
 
-app.post("/answer/:id", (req, res) => {
+app.post("/answer/:id", checkJwt, (req, res) => {
   const answer = req.body.answer;
   const id = parseInt(req.params.id)
   const question = questions.filter( q => (q.id === id));
   if (question.length > 1) return res.status(500).send();
   if (question.length === 0) return res.status(404).send()
-  question[0].answers.push(answer);
+  question[0].answers.push({
+    answer,
+    author: req.user.name
+  });
   res.status(200).send();
 });
 
