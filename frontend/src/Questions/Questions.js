@@ -12,7 +12,7 @@ class Questions extends Component {
   async componentDidMount() {
     const questions = (await axios.get('http://localhost:8080/')).data;
     this.setState({
-      questions: questions,
+      questions: questions
     });
   }
   render(){
@@ -36,7 +36,9 @@ class Questions extends Component {
                 <Link to={`/question/${q.id}`}>
                   <div className="card text-white bg-success mb-3">
                     <div className="card-header">
-                      Answer: {q.answers}
+                      Answer: {q.answers.map(a =>(
+                        <div><h3>{a.answer}</h3> by: {a.author}</div>
+                      ))}
                       <div className="card-body">
                         <h4 className="card-title">{q.title}</h4>
                         <p className="card-text">{q.description}</p>

@@ -9,32 +9,35 @@ class Question extends Component {
     this.state = {
       question: null,
     };
+
     this.submitAnswer = this.submitAnswer.bind(this);
   }
-  async componentDidMount(){
+
+  async componentDidMount() {
     await this.refreshQuestion();
   }
 
-  async refreshQuestion(){
+  async refreshQuestion() {
     const { match: { params } } = this.props;
     const question = (await axios.get(`http://localhost:8080/${params.questionId}`)).data;
     this.setState({
-      question: question,
+      question,
     });
   }
 
-  async submitAnswer(answer){
-    await axios.post(`http://localhost:8081/answer/${this.state.question.id}`, {
+  async submitAnswer(answer) {
+    await axios.post(`http://localhost:8080/answer/${this.state.question.id}`, {
       answer,
     }, {
       headers: { 'Authorization': `Bearer ${auth0Client.getIdToken()}` }
     });
     await this.refreshQuestion();
   }
-  render(){
-    const question = this.state.question;
-    if (question === null) return <p>Loading..</p>;
-    return(
+
+  render() {
+    const {question} = this.state;
+    if (question === null) return <p>Loading ...</p>;
+    return (
       <div className="container">
         <div className="row">
           <div className="jumbotron col-12">
@@ -45,7 +48,7 @@ class Question extends Component {
             <p>Answers:</p>
             {
               question.answers.map((answer, idx) => (
-                <p className="lead" key={idx}>{answer}</p>
+                <p className="lead" key={idx}>{answer.answer}</p>
               ))
             }
           </div>
