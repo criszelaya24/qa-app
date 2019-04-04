@@ -3,6 +3,7 @@ import auth0 from 'auth0-js';
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
+      // the following three lines MUST be updated
       domain: 'dev-uf1fkybj.auth0.com',
       audience: 'https://dev-uf1fkybj.auth0.com/userinfo',
       clientID: '87DwawCr74SxzSjsBFTjue2Mj8zbh1qW',
@@ -10,29 +11,31 @@ class Auth {
       responseType: 'id_token',
       scope: 'openid profile'
     });
+
     this.getProfile = this.getProfile.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
   }
-  getProfile(){
+
+  getProfile() {
     return this.profile;
   }
 
-  getIdToken(){
+  getIdToken() {
     return this.idToken;
   }
 
   isAuthenticated() {
-   return new Date().getTime() < this.expiresAt;
- }
+    return new Date().getTime() < this.expiresAt;
+  }
 
- signIn() {
-   this.auth0.authorize();
- }
+  signIn() {
+    this.auth0.authorize();
+  }
 
- handleAuthentication() {
+  handleAuthentication() {
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
         if (err) return reject(err);
@@ -55,5 +58,7 @@ class Auth {
     this.expiresAt = null;
   }
 }
-const auth0Client = new Auth()
+
+const auth0Client = new Auth();
+
 export default auth0Client;
