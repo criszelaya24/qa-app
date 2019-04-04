@@ -79,3 +79,5 @@ class NewQuestion extends Component {
     )
   }
 }
+
+export default withRouter(NewQuestion);
