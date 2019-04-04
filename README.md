@@ -1,14 +1,13 @@
 # qa-app :bomb:
 
-## From?
-- Tutorial from [auth0 turotial](https://auth0.com/blog/react-tutorial-building-and-securing-your-first-app/)
-
 ## how to install? :point_down:
 
 ```
 - Download this repo
 - get inside inside from each folder
 - run "npm install"
+- for backed: run 'nodemon src/index.js'
+- for frontend: run 'npm start'
 - ready to go!
 ```
 
