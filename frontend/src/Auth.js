@@ -61,9 +61,8 @@ class Auth {
      clientID: '87DwawCr74SxzSjsBFTjue2Mj8zbh1qW',
    });
   }
-}
 
-silentAuth(){
+silentAuth() {
   return new Promise((resolve, reject) => {
       this.auth0.checkSession({}, (err, authResult) => {
         if (err) return reject(err);
@@ -71,7 +70,7 @@ silentAuth(){
         resolve();
       });
     });
-  }  
+  }
 }
 
 const auth0Client = new Auth();
