@@ -20,7 +20,7 @@
 ## About :page_with_curl:
 
 ```
-The hole app consist in save questions and answers from the backend and from
+The hole app consist in save temporary questions and answers from the backend and from
 the frotend shows them to the user and allow to the same user to post news questions
 and answer, all this in one single page app
 ```

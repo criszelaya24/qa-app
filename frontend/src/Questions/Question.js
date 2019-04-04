@@ -18,9 +18,6 @@ class Question extends Component {
   render(){
     const question = this.state.question;
     if (question === null) return <p>Loading..</p>;
-    question.answers.map((answer, idx) => (
-      console.log(idx)
-    ))
     return(
       <div className="container">
         <div className="row">
